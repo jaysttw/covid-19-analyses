@@ -15,4 +15,5 @@ This repository currently covers data from the following sources:
         * Line graph showing historical rates of increase globally and for said 3 countries
         * Highlights of 3 countries.
 * Build simple country-level model predicting the number of cases/deaths
+* Build new notebook for easy debugging of import errors.
 * Integrate other data sources, such as:
