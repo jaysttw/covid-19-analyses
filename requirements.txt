@@ -35,7 +35,7 @@ google-pasta==0.2.0
 grpcio==1.29.0
 h5py==2.10.0
 idna==2.9
-importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1591451756227/work
+importlib-metadata
 itsdangerous==1.1.0
 jedi==0.17.0
 Jinja2==2.11.2
