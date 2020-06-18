@@ -71,6 +71,8 @@ def latest_worldbank(wb_code):
 def calculate_case_rate(cases, population):
     result = cases.copy()
     for col in cases.columns:
-        result[col] = 1000000 * cases[col] / population.loc[col].iloc[-1]  # calculate cases per million
-
+        try:
+            result[col] = 1000000 * cases[col] / population.loc[col].iloc[-1]  # calculate cases per million
+        except KeyError:
+            pass
     return result
