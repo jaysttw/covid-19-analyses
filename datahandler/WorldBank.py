@@ -65,4 +65,4 @@ def _retrieve_worldbank(wb_code):
     return pd.read_csv("tmp/" + max(file_dates), skiprows=3, index_col="Country Name").iloc[:, :-2]
 
 def latest_worldbank(wb_code):
-    return _retrieve_worldbank(wb_code).iloc[:, [0, -1]]
+    return _retrieve_worldbank(wb_code).iloc[:, [0, -1]].rename(index={v:k for (k,v) in WORLDBANK_COUNTRIES.items()})
