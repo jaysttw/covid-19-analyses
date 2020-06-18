@@ -1,15 +1,15 @@
 absl-py==0.9.0
-arviz @ file:///home/conda/feedstock_root/build_artifacts/arviz_1590675208987/work
+arviz
 astunparse==1.6.3
 attrs==19.3.0
 backcall==0.1.0
-bleach @ file:///home/conda/feedstock_root/build_artifacts/bleach_1588608214987/work
-bokeh @ file:///home/conda/feedstock_root/build_artifacts/bokeh_1592267895127/work
+bleach
+bokeh
 brotlipy==0.7.0
 cachetools==4.1.0
 certifi==2020.4.5.2
 cffi==1.14.0
-cftime @ file:///home/conda/feedstock_root/build_artifacts/cftime_1589387661336/work
+cftime
 chardet==3.0.4
 chart-studio==1.1.0
 click==7.1.2
@@ -17,11 +17,11 @@ colorlover==0.3.0
 cryptography==2.9.2
 cufflinks==0.17.3
 cycler==0.10.0
-dash @ file:///home/conda/feedstock_root/build_artifacts/dash_1588897734495/work
-dash-core-components @ file:///home/conda/feedstock_root/build_artifacts/dash-core-components_1588718481532/work
+dash
+dash-core-components
 dash-html-components==1.0.3
-dash-renderer @ file:///home/conda/feedstock_root/build_artifacts/dash-renderer_1588706167484/work
-dash-table @ file:///home/conda/feedstock_root/build_artifacts/dash-table_1588867552135/work
+dash-renderer
+dash-table
 decorator==4.4.2
 defusedxml==0.6.0
 entrypoints==0.3
@@ -36,17 +36,11 @@ grpcio==1.29.0
 h5py==2.10.0
 idna==2.9
 importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1591451756227/work
-ipykernel @ file:///home/conda/feedstock_root/build_artifacts/ipykernel_1590020202605/work/dist/ipykernel-5.3.0-py3-none-any.whl
-ipython @ file:///home/conda/feedstock_root/build_artifacts/ipython_1590796906184/work
-ipython-genutils==0.2.0
-ipywidgets==7.5.1
 itsdangerous==1.1.0
 jedi==0.17.0
 Jinja2==2.11.2
 joblib==0.15.1
 jsonschema==3.2.0
-jupyter-client==6.1.3
-jupyter-core==4.6.3
 Keras-Preprocessing==1.1.2
 kiwisolver==1.2.0
 Mako==1.1.3
@@ -54,17 +48,17 @@ Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.1
 mistune==0.8.4
-more-itertools @ file:///home/conda/feedstock_root/build_artifacts/more-itertools_1592197792446/work
+more-itertools
 nbconvert==5.6.1
 nbformat==5.0.6
 netCDF4==1.5.3
 notebook==6.0.3
-numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1591485221441/work
+numpy
 oauthlib==3.1.0
 olefile==0.46
 opt-einsum==3.2.1
-packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1589925210001/work
-pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1590752755944/work
+packaging
+pandas
 pandocfilters==1.4.2
 parso==0.7.0
 patsy==0.5.1
@@ -74,11 +68,9 @@ Pillow==7.1.2
 plotly==4.8.1
 plotly-geo==1.0.0
 pluggy==0.13.1
-prometheus-client @ file:///home/conda/feedstock_root/build_artifacts/prometheus_client_1590412252446/work
 prompt-toolkit==3.0.5
 protobuf==3.12.2
 ptyprocess==0.6.0
-py @ file:///home/conda/feedstock_root/build_artifacts/py_1592226675012/work
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
@@ -94,6 +86,7 @@ PyQtWebEngine==5.12.1
 pyrsistent==0.16.0
 PySocks==1.7.1
 pytest==5.4.3
+python==3.8
 python-dateutil==2.8.1
 pytz==2020.1
 PyYAML==5.3.1
@@ -102,7 +95,7 @@ requests==2.23.0
 requests-oauthlib==1.3.0
 retrying==1.3.3
 rsa==4.6
-scikit-learn @ file:///home/conda/feedstock_root/build_artifacts/scikit-learn_1589920858304/work
+scikit-learn
 scipy==1.4.1
 seaborn==0.10.1
 Send2Trash==1.5.0
@@ -116,13 +109,13 @@ termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
 Theano==1.0.4
-threadpoolctl @ file:///tmp/tmp79xdzxkt/threadpoolctl-2.1.0-py3-none-any.whl
+threadpoolctl
 tornado==6.0.4
-tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1591181521996/work
+tqdm
 traitlets==4.3.3
-typing-extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1588470653596/work
+typing-extensions
 urllib3==1.25.9
-wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1591600393557/work
+wcwidth
 webencodings==0.5.1
 Werkzeug==1.0.1
 widgetsnbextension==3.5.1
