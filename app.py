@@ -42,6 +42,8 @@ def regional_cases_graph_per_capita(region, country):
 
 app = dash.Dash(__name__)
 
+server = app.server
+
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
                                            style={'textAlign': 'center'}
