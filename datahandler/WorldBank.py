@@ -66,3 +66,11 @@ def _retrieve_worldbank(wb_code):
 
 def latest_worldbank(wb_code):
     return _retrieve_worldbank(wb_code).iloc[:, [0, -1]].rename(index={v:k for (k,v) in WORLDBANK_COUNTRIES.items()})
+
+
+def calculate_case_rate(cases, population):
+    result = cases.copy()
+    for col in cases.columns:
+        result[col] = 1000000 * cases[col] / population.loc[col].iloc[-1]  # calculate cases per million
+
+    return result
