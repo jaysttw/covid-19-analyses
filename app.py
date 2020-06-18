@@ -25,9 +25,7 @@ def regional_cases_graph(region, country):
                      id=('COVID-19 in ' + region)
                      )
 
-external_stylesheets = ['dash.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
