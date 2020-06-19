@@ -15,6 +15,19 @@ CSV_URL['US_DEATHS'] = "time_series_covid19_deaths_US.csv"
 
 
 def _process_columns(col_name):
+    '''
+    Formats the column entries in the JHU CSSE raw data to datetime format, returning the original value if not a date.
+    Parameters
+    ----------
+    col_name : str
+        Name of the original column.
+
+    Returns
+    -------
+    str or datetime.date
+        Either a string with the original column name, if conversion fails, or the converted datetime.date value.
+
+    '''
     try:
         return dt.datetime.strptime(col_name, '%m/%d/%y').date()
     except ValueError:
