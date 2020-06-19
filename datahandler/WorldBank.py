@@ -9,7 +9,7 @@ import os
 import requests
 
 # World Bank population data paths
-WORLDBANK_API_URL = "http://api.worldbank.org/v2/en/indicator/"
+WORLDBANK_API_URL = "https://api.worldbank.org/v2/en/indicator/"
 WORLDBANK_API_CSV = "?downloadformat=csv"
 
 def _worldbank_url(wb_code):
