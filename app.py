@@ -2,6 +2,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
+from flask_talisman import Talisman
 
 import datahandler.JHU
 import datahandler.WorldBank
@@ -41,6 +42,7 @@ def regional_cases_graph_per_capita(region, country):
                      )
 
 app = dash.Dash(__name__)
+Talisman(app)
 
 server = app.server
 
