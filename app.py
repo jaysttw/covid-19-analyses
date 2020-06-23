@@ -15,7 +15,7 @@ countries_of_interest = {'Asia': ['Bahrain', 'Singapore'],
                          'Oceania': ['New Zealand', 'Australia'],
                          'South America': ['Argentina', 'Brazil', 'Ecuador']
                          }
-latest_wb_pop = datahandler.WorldBank.latest_worldbank("SP.POP.TOTL", use_cached=True)
+latest_wb_pop = datahandler.WorldBank.latest_worldbank("SP.POP.TOTL")
 cases_per_capita = datahandler.WorldBank.calculate_case_rate(country_level_data,
                                                              latest_wb_pop
                                                              )
