@@ -69,7 +69,7 @@ csp = {
     "script-src": ["'self'"] + calculate_inline_hashes(app),
 }
 
-server = Talisman(app.server, content_security_policy=csp)
+Talisman(app.server, content_security_policy=csp)
 
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
