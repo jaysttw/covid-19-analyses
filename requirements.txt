@@ -111,6 +111,7 @@ tqdm
 traitlets==4.3.3
 typing-extensions
 urllib3==1.25.9
+uvicorn
 wcwidth
 webencodings==0.5.1
 Werkzeug==1.0.1
