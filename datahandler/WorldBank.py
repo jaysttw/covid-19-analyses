@@ -51,10 +51,14 @@ WORLDBANK_COUNTRIES = {
     'Brunei': 'Brunei Darussalam'
 }
 
-def _retrieve_worldbank(wb_code):
+def _download_worldbank(wb_code):
     worldbank_pop_request = requests.get(_worldbank_url(wb_code))
     with zf.ZipFile(io.BytesIO(worldbank_pop_request.content), 'r') as wb_pop_zip:
         wb_pop_zip.extractall('tmp')
+
+def _retrieve_worldbank(wb_code, use_cached=False):
+    if use_cached == False: _download_worldbank(wb_code)
+    else: print("Using cached data...")
     raw_csvs = [x for x in os.listdir('tmp') if x.startswith("API_" + wb_code)]
     file_dates = {}
     for file in raw_csvs:
@@ -64,8 +68,8 @@ def _retrieve_worldbank(wb_code):
                 file_dates[file] = dt.datetime.strptime(row[1], "%Y-%m-%d").date()
     return pd.read_csv("tmp/" + max(file_dates), skiprows=3, index_col="Country Name").iloc[:, :-2]
 
-def latest_worldbank(wb_code):
-    return _retrieve_worldbank(wb_code).iloc[:, [0, -1]].rename(index={v:k for (k,v) in WORLDBANK_COUNTRIES.items()})
+def latest_worldbank(wb_code, *args, **kwargs):
+    return _retrieve_worldbank(wb_code, *args, **kwargs).iloc[:, [0, -1]].rename(index={v:k for (k,v) in WORLDBANK_COUNTRIES.items()})
 
 
 def calculate_case_rate(cases, population):
