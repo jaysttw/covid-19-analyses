@@ -21,7 +21,7 @@ cases_per_capita = datahandler.WorldBank.calculate_case_rate(country_level_data,
                                                              )
 
 def confirmed_cases(country, df=country_level_data):
-    return go.Line(x=df.index, y=df[country], name=country)
+    return go.Scatter(x=df.index, y=df[country], name=country)
 
 def regional_cases_graph(region, country):
     return dcc.Graph(figure={'data': [confirmed_cases(x) for x in country],
@@ -81,7 +81,7 @@ app.layout = html.Div(children=[
                                                       html.B(f"{country_level_data.sum(axis=1)[-1]:,} confirmed cases globally.")
                                                       ]
                                             ),
-                                   dcc.Graph(figure={'data': [go.Line(x=country_level_data.index,
+                                   dcc.Graph(figure={'data': [go.Scatter(x=country_level_data.index,
                                                                       y=country_level_data.sum(axis=1),
                                                                       name='Confirmed cases'
                                                                       )], # expects a dict
@@ -95,7 +95,7 @@ app.layout = html.Div(children=[
                                    html.H3(children='Headline figures:'),
                                    html.Table([html.Thead(html.Tr([html.Th(x) for sl in countries_of_interest.values() for x in sl])),
                                                html.Tbody(html.Tr([html.Td(f"{country_level_data.iloc[-1][x]:,}"
-                                                                           f"(+{country_level_data.diff().iloc[-1][x]:,.0f})" 
+                                                                           f"(+{country_level_data.diff().iloc[-1][x]:,.0f})"
                                                                            f"(+{country_level_data.pct_change().iloc[-1][x]:,.3f}%)"
                                                                            ) for sl in countries_of_interest.values() for x in sl]))
                                                ]),
@@ -104,10 +104,10 @@ app.layout = html.Div(children=[
                                                     'display': 'inline-block'}
                                              ) for (k, v) in countries_of_interest.items()
                                     ] + [html.H3(children='Cases per capita')] + [html.Div(regional_cases_graph_per_capita(k, v),
-                                                                                          style={'width': '49%',
-                                                                                                 'display': 'inline-block'}
-                                                                                          ) for (k, v) in countries_of_interest.items()
-                                                                                 ]
+                                                                                           style={'width': '49%',
+                                                                                                  'display': 'inline-block'}
+                                                                                           ) for (k, v) in countries_of_interest.items()
+                                                                                  ]
                       )
 
 if __name__ == '__main__':
