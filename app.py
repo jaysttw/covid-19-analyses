@@ -15,7 +15,7 @@ countries_of_interest = {'Asia': ['Bahrain', 'Singapore'],
                          'Oceania': ['New Zealand', 'Australia'],
                          'South America': ['Argentina', 'Brazil', 'Ecuador']
                          }
-latest_wb_pop = datahandler.WorldBank.latest_worldbank("SP.POP.TOTL")
+latest_wb_pop = datahandler.WorldBank.latest_worldbank("SP.POP.TOTL", use_cached=True)
 cases_per_capita = datahandler.WorldBank.calculate_case_rate(country_level_data,
                                                              latest_wb_pop
                                                              )
@@ -41,9 +41,35 @@ def regional_cases_graph_per_capita(region, country):
                      id=('COVID-19 per capita in ' + region)
                      )
 
+# Content Security Policy Fix from https://github.com/plotly/dash/issues/630#issuecomment-605523528
+import hashlib
+import base64
+from typing import List
+
+def calculate_inline_hashes(app: dash.Dash) -> List[str]:
+    """Given a Dash app instance, this function calculates
+    CSP hashes (sha256 + base64) of all inline scripts, such that
+    one of the biggest benefits of CSP (banning general inline scripts)
+    can be utilized.
+
+    Warning: Note that this function uses a "private" Dash app attribute,
+    app._inline_scripts, which might change from one Dash version to the next.
+    """
+    return [
+        f"'sha256-{base64.b64encode(hashlib.sha256(script.encode('utf-8')).digest()).decode('utf-8')}'"
+        for script in [app.renderer] + app._inline_scripts
+    ]
+
+# app starts here
+
 app = dash.Dash(__name__)
 
-server = Talisman(app.server)
+csp = {
+    "default-src": ["'self'"],
+    "script-src": ["'self'"] + calculate_inline_hashes(app),
+}
+
+server = Talisman(app.server, content_security_policy=csp)
 
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
@@ -68,7 +94,10 @@ app.layout = html.Div(children=[
                                    html.H2(children='Country-level specifics:'),
                                    html.H3(children='Headline figures:'),
                                    html.Table([html.Thead(html.Tr([html.Th(x) for sl in countries_of_interest.values() for x in sl])),
-                                               html.Tbody(html.Tr([html.Td(f"{country_level_data.iloc[-1][x]:,} (+{country_level_data.diff().iloc[-1][x]:,.0f}) (+{country_level_data.pct_change().iloc[-1][x]:,.3f}%)") for sl in countries_of_interest.values() for x in sl]))
+                                               html.Tbody(html.Tr([html.Td(f"{country_level_data.iloc[-1][x]:,}"
+                                                                           f"(+{country_level_data.diff().iloc[-1][x]:,.0f})" 
+                                                                           f"(+{country_level_data.pct_change().iloc[-1][x]:,.3f}%)"
+                                                                           ) for sl in countries_of_interest.values() for x in sl]))
                                                ]),
                                ] + [html.Div(regional_cases_graph(k, v),
                                              style={'width': '49%',
