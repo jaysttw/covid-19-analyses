@@ -71,6 +71,7 @@ csp = {
 }
 
 #server = Talisman(app.server, content_security_policy=csp)
+server = app.server
 
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
