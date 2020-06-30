@@ -6,6 +6,7 @@ from flask_talisman import Talisman
 
 import datahandler.JHU
 import datahandler.WorldBank
+import datetime as dt
 
 country_level_data = datahandler.JHU.global_case_data()
 countries_list = country_level_data.columns
@@ -70,8 +71,8 @@ csp = {
     #"style-src": ["'self'", "'unsafe-inline'"]
 }
 
-#server = Talisman(app.server, content_security_policy=csp)
-server = app.server
+server = Talisman(app.server, content_security_policy=csp)
+#server = app.server
 
 app.layout = html.Div(children=[
                                    html.H1(children='Personalised Dashboard for COVID-19 monitoring',
@@ -80,7 +81,9 @@ app.layout = html.Div(children=[
                                    html.Div(children='''This page maintains a dashboard for my personal observations of the spread of the virus.'''),
                                    html.H2(children='Global cases:'),
                                    html.Div(children=[html.Span(f"As of {country_level_data.index[-1]}, there are "),
-                                                      html.B(f"{country_level_data.sum(axis=1)[-1]:,} confirmed cases globally.")
+                                                      html.B(f"{country_level_data.sum(axis=1)[-1]:,} confirmed cases globally. "),
+                                                      html.Span(f"This data was updated "),
+                                                      html.B(f"{(dt.date.today() - country_level_data.index[-1]).days} day(s) ago.")
                                                       ]
                                             ),
                                    dcc.Graph(figure={'data': [go.Scatter(x=country_level_data.index,
