@@ -91,19 +91,11 @@ def align_cases(df, threshold):
     return result
 
 
-def train_val_test_split(df, seq_length: int = None):
+def train_val_test_split(df):
     '''Splits the input dataframe into train, validation, and test. This function first defines an inner function that
     operates on a column, returning three dataframes containing the respective sets.
 
     '''
-
-    def _process_column(df, seq_length: int, col: str, test_len: int):
-        # print(f"Processing: {col}") # uncomment to see progress of function, but clutters output
-        temp = df[col].dropna()
-        n = len(temp) - seq_length + 1
-        train_len = n - (2 * test_len)
-        result = [temp[x:x + seq_length] for x in range(n)]
-        return result[:train_len], result[train_len:train_len + test_len], result[train_len + test_len:]
 
     dates_of_first_cases = first_crossed(df, 1)
     days_with_cases = {x: len(df[x][dates_of_first_cases[x] - dt.timedelta(1):]) for x in dates_of_first_cases.index}
@@ -111,29 +103,38 @@ def train_val_test_split(df, seq_length: int = None):
     shortest_run = days_with_cases[min(days_with_cases, key=days_with_cases.get)]
 
     test_len = int(shortest_run/5)
-    train_len = len(df) - (2 * test_len)
+    train_len = n - (2 * test_len)
 
-    if seq_length is None:
-        train_set = df.iloc[:train_len, :]
-        val_set = df.iloc[train_len:train_len+test_len, :]
-        test_set = df.iloc[train_len+test_len:, :]
+    # def _process_column(df, seq_length: int, col: str):
+    #     print(f"Processing: {col}")
+    #     temp = df[col].dropna()
+    #     n = len(temp) - seq_length + 1
+    #     result = [temp[x:x + seq_length] for x in range(n)]
+    #     test_len = int(n / 5)
+    #     train_len = n - (2 * test_len)
+    #     return (result[:train_len], result[train_len:train_len + test_len], result[train_len + test_len:])
+    #
+    # # train_set = []
+    # # val_set = []
+    # # test_set = []
+    # #
+    # # for col in df.columns:
+    # #     train_temp, val_temp, test_temp = _process_column(df, seq_length, col)
+    # #     train_set += train_temp
+    # #     val_set += val_temp
+    # #     test_set += test_temp
+    # #
+    # # train_set = pd.DataFrame([x.reset_index(drop=True) for x in train_set])
+    # # val_set = pd.DataFrame([x.reset_index(drop=True) for x in val_set])
+    # # test_set = pd.DataFrame([x.reset_index(drop=True) for x in test_set])
 
-    else:
-        train_set = []
-        val_set = []
-        test_set = []
-
-        for col in df.columns:
-            train_temp, val_temp, test_temp = _process_column(df, seq_length, col, test_len)
-            train_set += train_temp
-            val_set += val_temp
-            test_set += test_temp
-
-        train_set = pd.DataFrame([x.reset_index(drop=True) for x in train_set])
-        val_set = pd.DataFrame([x.reset_index(drop=True) for x in val_set])
-        test_set = pd.DataFrame([x.reset_index(drop=True) for x in test_set])
-
+    train_set = df[:train_len]
+    val_set = df[train_len:train_len+test_len]
+    test_set = df[train_len+test_len:]
     return train_set, val_set, test_set
+
+def train_val_test_sequences(df, seq_length: int):
+    pass
 
 # # Unused code
 # df_us_confirmed = (pd.read_csv(TIME_SERIES_PATH + CSV_URL['US_CONFIRMED'])
