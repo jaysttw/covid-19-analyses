@@ -103,7 +103,7 @@ def train_val_test_split(df):
     shortest_run = days_with_cases[min(days_with_cases, key=days_with_cases.get)]
 
     test_len = int(shortest_run/5)
-    train_len = n - (2 * test_len)
+    train_len = len(df) - (2 * test_len)
 
     # def _process_column(df, seq_length: int, col: str):
     #     print(f"Processing: {col}")
@@ -128,13 +128,16 @@ def train_val_test_split(df):
     # # val_set = pd.DataFrame([x.reset_index(drop=True) for x in val_set])
     # # test_set = pd.DataFrame([x.reset_index(drop=True) for x in test_set])
 
-    train_set = df[:train_len]
-    val_set = df[train_len:train_len+test_len]
-    test_set = df[train_len+test_len:]
+    train_set = df.iloc[:, :train_len]
+    val_set = df.iloc[:, train_len:train_len+test_len]
+    test_set = df.iloc[:, train_len+test_len:]
     return train_set, val_set, test_set
 
 def train_val_test_sequences(df, seq_length: int):
-    pass
+    results = []
+    for col in df.columns: 
+        results.append([df[col][x:seq_length] for x in range(len(df) - seq_length + 1)])
+    return result
 
 # # Unused code
 # df_us_confirmed = (pd.read_csv(TIME_SERIES_PATH + CSV_URL['US_CONFIRMED'])
