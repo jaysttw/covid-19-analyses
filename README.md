@@ -16,4 +16,6 @@ This repository currently covers data from the following sources:
         * [x] Highlights of 3 countries.
 * [] Build simple country-level model predicting the number of cases/deaths
 * [] Build new notebook for easy debugging of import errors.
+* [] Clean and update `requirements.txt` for easy deployment.
+    * Currently set to a generic environment with unused packages included. 
 * [] Integrate other data sources, such as:
