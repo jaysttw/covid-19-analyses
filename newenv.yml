@@ -11,4 +11,8 @@ dependencies:
   - dash
   - flask-talisman
   - ipykernel
+  - statsmodels
+  - requests
+  - matplotlib
+  - xgboost
 prefix: /Users/jayseetow/opt/anaconda3/envs/covid-19-analyses
