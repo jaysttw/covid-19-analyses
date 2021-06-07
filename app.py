@@ -47,27 +47,29 @@ import hashlib
 import base64
 from typing import List
 
-def calculate_inline_hashes(app: dash.Dash) -> List[str]:
-    """Given a Dash app instance, this function calculates
-    CSP hashes (sha256 + base64) of all inline scripts, such that
-    one of the biggest benefits of CSP (banning general inline scripts)
-    can be utilized.
-
-    Warning: Note that this function uses a "private" Dash app attribute,
-    app._inline_scripts, which might change from one Dash version to the next.
-    """
-    return [
-        f"'sha256-{base64.b64encode(hashlib.sha256(script.encode('utf-8')).digest()).decode('utf-8')}'"
-        for script in [app.renderer] + app._inline_scripts
-    ]
+# def calculate_inline_hashes(app: dash.Dash) -> List[str]:
+#     """Given a Dash app instance, this function calculates
+#     CSP hashes (sha256 + base64) of all inline scripts, such that
+#     one of the biggest benefits of CSP (banning general inline scripts)
+#     can be utilized.
+#
+#     Warning: Note that this function uses a "private" Dash app attribute,
+#     app._inline_scripts, which might change from one Dash version to the next.
+#     """
+#     return [
+#         f"'sha256-{base64.b64encode(hashlib.sha256(script.encode('utf-8')).digest()).decode('utf-8')}'"
+#         for script in [app.renderer] + app._inline_scripts
+#     ]
 
 # app starts here
 
 app = dash.Dash(__name__)
+app.css.config.serve_locally = True
+app.scripts.config.serve_locally = True
 
 csp = {
     "default-src": ["'self'"],
-    "script-src": ["'self'"] + calculate_inline_hashes(app),
+    "script-src": ["'self'"] + app.csp_hashes() # calculate_inline_hashes(app),
     #"style-src": ["'self'", "'unsafe-inline'"]
 }
 
