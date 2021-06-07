@@ -10,4 +10,5 @@ dependencies:
   - flask
   - dash
   - flask-talisman
+  - ipykernel
 prefix: /Users/jayseetow/opt/anaconda3/envs/covid-19-analyses
